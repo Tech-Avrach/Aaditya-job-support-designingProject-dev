@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -599,422 +600,6 @@ const AddAccountInformation = ({ userDetail }) => {
         />
       ) : (
         <Row>
-          {/* {id && (
-            <Col md={{ size: 1, offset: 11 }}>
-              <IconContainer
-                id="edit-icon"
-                fontSize={"25px"}
-                Icon={EditIcon}
-                text="Edit"
-                handleOnClick={() => {
-                  hanldeViewPage();
-                }}
-              />
-            </Col>
-          )} */}
-
-          {/* <Col md="12">
-            <Card className="main-card mb-3">
-              <Form>
-                <CardBody>
-                  <Row>
-                    <Col md="4">
-                      <FormGroup>
-                        <Label for="type">
-                          Select Account Type
-                          <span style={{ color: "red" }}>*</span>
-                        </Label>
-                        <Input
-                          type="select"
-                          name="type"
-                          id="type"
-                          value={currentUser.type}
-                          onChange={handleInputChange}
-                          defaultValue={0}
-                        >
-                          <option key={0} value={0}>
-                            Individual
-                          </option>
-                          <option key={1} value={1}>
-                            Business
-                          </option>
-                        </Input>
-                      </FormGroup>
-                    </Col>
-                    <Col md="4">
-                      {currentUser?.type != "1" ? (
-                        <FormGroup>
-                          <Label for="taxId">
-                            Tax Id<span style={{ color: "red" }}>*</span>
-                          </Label>
-                          <Input
-                            invalid={taxIdErr !== "" ? true : false}
-                            type="text"
-                            name="taxId"
-                            id="taxId"
-                            placeholder="Tax Id..."
-                            onChange={handleInputChange}
-                            onKeyUp={handleValidation}
-                            value={currentUser ? currentUser.taxId : ""}
-                          />
-                          {taxIdErr !== "" && (
-                            <FormFeedback>{taxIdErr}</FormFeedback>
-                          )}
-                        </FormGroup>
-                      ) : (
-                        <FormGroup>
-                          <Label for="federalTaxId">
-                            Federal Tax Id
-                            <span style={{ color: "red" }}>*</span>
-                          </Label>
-                          <Input
-                            invalid={federalTaxIdErr !== "" ? true : false}
-                            type="text"
-                            name="federalTaxId"
-                            id="federalTaxId"
-                            placeholder="Federal Tax Id..."
-                            onChange={handleInputChange}
-                            onKeyUp={handleValidation}
-                            value={currentUser ? currentUser.federalTaxId : ""}
-                          />
-                          {federalTaxIdErr !== "" && (
-                            <FormFeedback>{federalTaxIdErr}</FormFeedback>
-                          )}
-                        </FormGroup>
-                      )}
-                    </Col>
-                    <Col md="4">
-                      <FormGroup>
-                        <Label for="taxProId">
-                          Select Tax Pro
-                          <span style={{ color: "red" }}>*</span>
-                        </Label>
-                        <Input
-                          invalid={taxProIdErr !== "" ? true : false}
-                          type="select"
-                          name="taxProId"
-                          id="taxProId"
-                          value={currentUser.taxProId}
-                          onChange={handleInputChange}
-                          onKeyUp={handleValidation}
-                        >
-                          <option value="">Select TaxPro</option>
-                          {taxProList.map((item) => (
-                            <option key={item.id} value={item.id}>
-                              {item.name}
-                            </option>
-                          ))}
-                        </Input>
-                        {taxProIdErr !== "" && (
-                          <FormFeedback>{taxProIdErr}</FormFeedback>
-                        )}
-                      </FormGroup>
-                    </Col>
-                    <Col md="4">
-                      <FormGroup>
-                        <Label for="cafNumber">
-                          CAF Number
-                          <span style={{ color: "red" }}>*</span>
-                        </Label>
-                        <Input
-                          invalid={cafNumberErr !== "" ? true : false}
-                          type="text"
-                          name="cafNumber"
-                          id="cafNumber"
-                          placeholder="CAF Number..."
-                          value={
-                            currentUser?.TaxPro?.cafNumber ??
-                            selectedName?.cafNumber ??
-                            ""
-                          }
-                          disabled
-                        />
-                        {cafNumberErr !== "" && (
-                          <FormFeedback>{cafNumberErr}</FormFeedback>
-                        )}
-                      </FormGroup>
-                    </Col>
-                    {currentUser?.type == 1 && (
-                      <>
-                        <Col md="4">
-                          <FormGroup>
-                            <Label for="legalBusinessName">
-                              Legal Business Name
-                              <span style={{ color: "red" }}>*</span>
-                            </Label>
-                            <Input
-                              invalid={
-                                legalBusinessNameErr !== "" ? true : false
-                              }
-                              type="text"
-                              name="legalBusinessName"
-                              id="legalBusinessName"
-                              placeholder="Legal Business here..."
-                              value={
-                                currentUser.legalBusinessName
-                                  ? currentUser.legalBusinessName
-                                  : ""
-                              }
-                              onChange={handleInputChange}
-                              onKeyUp={handleValidation}
-                            />
-                            {legalBusinessNameErr !== "" && (
-                              <FormFeedback>
-                                {legalBusinessNameErr}
-                              </FormFeedback>
-                            )}
-                          </FormGroup>
-                        </Col>
-
-                        <Col md="4">
-                          <FormGroup>
-                            <Label for="dbaName">DBA Name</Label>
-                            <Input
-                              type="text"
-                              name="dbaName"
-                              id="dbaName"
-                              placeholder="DBA Name here..."
-                              value={
-                                currentUser.dbaName ? currentUser.dbaName : ""
-                              }
-                              onChange={handleInputChange}
-                            />
-                          </FormGroup>
-                        </Col>
-                      </>
-                    )}
-                    {currentUser?.type == 0 && (
-                      <>
-                        <Col md="4">
-                          <FormGroup>
-                            <Label for="firstName">
-                              First Name
-                              <span style={{ color: "red" }}>*</span>
-                            </Label>
-                            <Input
-                              invalid={firstNameErr !== "" ? true : false}
-                              type="text"
-                              name="firstName"
-                              id="firstName"
-                              placeholder="First Name here..."
-                              value={
-                                currentUser.firstName
-                                  ? currentUser.firstName
-                                  : ""
-                              }
-                              onChange={handleInputChange}
-                              onKeyUp={handleValidation}
-                            />
-                            {firstNameErr !== "" && (
-                              <FormFeedback>{firstNameErr}</FormFeedback>
-                            )}
-                          </FormGroup>
-                        </Col>
-
-                        <Col md="4">
-                          <FormGroup>
-                            <Label for="middleInitial">Middle Initial</Label>
-                            <Input
-                              invalid={middleInitialErr !== "" ? true : false}
-                              type="text"
-                              name="middleInitial"
-                              id="middleInitial"
-                              placeholder="Middle Initial here..."
-                              value={
-                                currentUser.middleInitial
-                                  ? currentUser.middleInitial
-                                  : ""
-                              }
-                              onChange={handleInputChange}
-                              onKeyUp={handleValidation}
-                            />
-                            {middleInitialErr !== "" && (
-                              <FormFeedback>{middleInitialErr}</FormFeedback>
-                            )}
-                          </FormGroup>
-                        </Col>
-                      </>
-                    )}
-                    {currentUser?.type == 0 && (
-                      <>
-                        <Col md="4">
-                          <FormGroup>
-                            <Label for="lastName">
-                              Last Name
-                              <span style={{ color: "red" }}>*</span>
-                            </Label>
-                            <Input
-                              invalid={lastNameErr !== "" ? true : false}
-                              type="text"
-                              name="lastName"
-                              id="lastName"
-                              placeholder="Last Name here..."
-                              value={
-                                currentUser.lastName ? currentUser.lastName : ""
-                              }
-                              onChange={handleInputChange}
-                              onKeyUp={handleValidation}
-                            />
-                            {lastNameErr !== "" && (
-                              <FormFeedback>{lastNameErr}</FormFeedback>
-                            )}
-                          </FormGroup>
-                        </Col>
-                        <Col md="4">
-                          <FormGroup>
-                            <Label for="addressOne">Date of Birth</Label>
-                            <input
-                              type="date"
-                              className="form-control"
-                              onChange={handleDateChange}
-                              value={currentUser.dob}
-                              max={new Date().toISOString().split("T")[0]}
-                            ></input>
-                          </FormGroup>
-                        </Col>
-                      </>
-                    )}
-                    <Col md="4">
-                      <FormGroup>
-                        <Label for="email">Email</Label>
-                        <Input
-                          invalid={emailErr !== "" ? true : false}
-                          type="email"
-                          name="email"
-                          id="email"
-                          placeholder="Email address here..."
-                          value={currentUser.email ? currentUser.email : ""}
-                          onChange={handleInputChange}
-                          onKeyUp={handleValidation}
-                        />
-                        {emailErr !== "" && (
-                          <FormFeedback>{emailErr}</FormFeedback>
-                        )}
-                      </FormGroup>
-                    </Col>
-                    <Col md="4">
-                      <FormGroup>
-                        <Label>Phone Number</Label>
-                        <Input
-                          invalid={contactNumberErr !== "" ? true : false}
-                          type="text"
-                          name="phoneNumber"
-                          id="phoneNumber"
-                          placeholder="Phone Number here..."
-                          value={
-                            currentUser.phoneNumber
-                              ? currentUser.phoneNumber
-                              : ""
-                          }
-                          onChange={handleInputChange}
-                          onKeyUp={handleValidation}
-                        />
-                        {contactNumberErr !== "" && (
-                          <FormFeedback>{contactNumberErr}</FormFeedback>
-                        )}
-                      </FormGroup>
-                    </Col>
-
-                    <Col md="4">
-                      <FormGroup>
-                        <Label for="address1"> Address 1</Label>
-                        <Input
-                          type="text"
-                          name="address1"
-                          id="address1"
-                          placeholder="Address..."
-                          value={
-                            currentUser.address1 ? currentUser.address1 : ""
-                          }
-                          onChange={handleInputChange}
-                          onKeyUp={handleValidation}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md="4">
-                      <FormGroup>
-                        <Label for="address2">Address 2</Label>
-                        <Input
-                          type="text"
-                          name="address2"
-                          id="address2"
-                          placeholder="Address..."
-                          value={
-                            currentUser.address2 ? currentUser.address2 : ""
-                          }
-                          onChange={handleInputChange}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md="4">
-                      <FormGroup>
-                        <Label for="city">City</Label>
-                        <Input
-                          type="text"
-                          name="city"
-                          id="city"
-                          placeholder="City here..."
-                          value={currentUser.city ? currentUser.city : ""}
-                          onChange={handleInputChange}
-                          onKeyUp={handleValidation}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md="4">
-                      <FormGroup>
-                        <Label for="state">State</Label>
-                        <Input
-                          type="text"
-                          name="state"
-                          id="state"
-                          placeholder="State here..."
-                          value={currentUser.state ? currentUser.state : ""}
-                          onChange={handleInputChange}
-                          onKeyUp={handleValidation}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md="4">
-                      <FormGroup>
-                        <Label for="zipCode">Zip Code</Label>
-                        <Input
-                          type="text"
-                          name="zipCode"
-                          id="zipCode"
-                          placeholder="Zip code here..."
-                          value={currentUser.zipCode ? currentUser.zipCode : ""}
-                          onChange={handleInputChange}
-                          onKeyUp={handleValidation}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                </CardBody>
-                <CardFooter className="d-block">
-                  <Button
-                    className="me-2"
-                    color="link"
-                    onClick={() => {
-                      hanldeViewPage();
-                      // navigate(`/account/list`);
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  {id ? (
-                    <Button size="lg" color="primary" onClick={updateHandler}>
-                      Save
-                    </Button>
-                  ) : (
-                    <Button size="lg" color="primary" onClick={addHandler}>
-                      Add Account
-                    </Button>
-                  )}
-                </CardFooter>
-              </Form>
-            </Card>
-          </Col> */}
-
           <Col md="12">
             <Card className="main-card mb-3">
               <Form>
@@ -1201,6 +786,7 @@ const AddAccountInformation = ({ userDetail }) => {
                       </Row>
                       ) : null}
                       <Row>
+                      { currentUser?.type != 1 ? (
                         <Col md="4">
                           <FormGroup>
                             <Label for="addressOne">Date of Birth</Label>
@@ -1212,44 +798,9 @@ const AddAccountInformation = ({ userDetail }) => {
                               max={new Date().toISOString().split("T")[0]}
                             ></input>
                           </FormGroup>
-                        </Col>
-                        <Col md="8">
-                          <FormGroup>
-                            <Label for="address1"> Address 1</Label>
-                            <Input
-                              type="text"
-                              name="address1"
-                              id="address1"
-                              placeholder="Address..."
-                              value={
-                                currentUser.address1 ? currentUser.address1 : ""
-                              }
-                              onChange={handleInputChange}
-                              onKeyUp={handleValidation}
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col md="8" className="offset-md-4">
-                          <FormGroup>
-                            <Label for="address2">Address 2</Label>
-                            <Input
-                              type="text"
-                              name="address2"
-                              id="address2"
-                              placeholder="Address..."
-                              value={
-                                currentUser.address2 ? currentUser.address2 : ""
-                              }
-                              onChange={handleInputChange}
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col md="4">
-                          <FormGroup>
+                        </Col>) 
+                        : <Col md="4">
+                            <FormGroup>
                             <Label>Phone Number</Label>
                             <Input
                               invalid={contactNumberErr !== "" ? true : false}
@@ -1269,6 +820,87 @@ const AddAccountInformation = ({ userDetail }) => {
                               <FormFeedback>{contactNumberErr}</FormFeedback>
                             )}
                           </FormGroup>
+                          </Col>}
+                        <Col md="8">
+                          <FormGroup>
+                            <Label for="address1"> Address 1</Label>
+                            <Input
+                              type="text"
+                              name="address1"
+                              id="address1"
+                              placeholder="Address..."
+                              value={
+                                currentUser.address1 ? currentUser.address1 : ""
+                              }
+                              onChange={handleInputChange}
+                              onKeyUp={handleValidation}
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+                      <Row>
+                      { currentUser?.type != 1 ? (
+                        <Col md="4">
+                          
+                        </Col>) 
+                        : <Col md="4">
+                            <FormGroup>
+                            <Label for="email">Email</Label>
+                            <Input
+                              invalid={emailErr !== "" ? true : false}
+                              type="email"
+                              name="email"
+                              id="email"
+                              placeholder="Email address here..."
+                              value={currentUser.email ? currentUser.email : ""}
+                              onChange={handleInputChange}
+                              onKeyUp={handleValidation}
+                            />
+                            {emailErr !== "" && (
+                              <FormFeedback>{emailErr}</FormFeedback>
+                            )}
+                          </FormGroup>
+                          </Col>}
+                        <Col md="8">
+                        <FormGroup>
+                            <Label for="address2">Address 2</Label>
+                            <Input
+                              type="text"
+                              name="address2"
+                              id="address2"
+                              placeholder="Address..."
+                              value={
+                                currentUser.address2 ? currentUser.address2 : ""
+                              }
+                              onChange={handleInputChange}
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md="4">
+                          { currentUser.type == 0 ? (
+                            <FormGroup>
+                            <Label>Phone Number</Label>
+                            <Input
+                              invalid={contactNumberErr !== "" ? true : false}
+                              type="text"
+                              name="phoneNumber"
+                              id="phoneNumber"
+                              placeholder="Phone Number here..."
+                              value={
+                                currentUser.phoneNumber
+                                  ? currentUser.phoneNumber
+                                  : ""
+                              }
+                              onChange={handleInputChange}
+                              onKeyUp={handleValidation}
+                            />
+                            {contactNumberErr !== "" && (
+                              <FormFeedback>{contactNumberErr}</FormFeedback>
+                            )}
+                          </FormGroup>
+                          ) : null }
                         </Col>
                         <Col md="8">
                           <FormGroup>
@@ -1287,7 +919,8 @@ const AddAccountInformation = ({ userDetail }) => {
                       </Row>
                       <Row>
                         <Col md="4">
-                          <FormGroup>
+                          { currentUser.type == 0 ? (
+                            <FormGroup>
                             <Label for="email">Email</Label>
                             <Input
                               invalid={emailErr !== "" ? true : false}
@@ -1303,6 +936,7 @@ const AddAccountInformation = ({ userDetail }) => {
                               <FormFeedback>{emailErr}</FormFeedback>
                             )}
                           </FormGroup>
+                          ) : null }
                         </Col>
                         <Col md="4">
                           <FormGroup>
