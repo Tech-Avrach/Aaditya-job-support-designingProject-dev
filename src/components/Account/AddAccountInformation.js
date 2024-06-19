@@ -61,6 +61,8 @@ const AddAccountInformation = ({ userDetail }) => {
   //input change handler
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
+    console.log(name, value)
     if (name === "taxProId") {
       const selectedId = parseInt(value);
       const selected = taxProList.find((item) => item.id === selectedId);
@@ -1069,7 +1071,8 @@ const AddAccountInformation = ({ userDetail }) => {
                     <Col md="6">
                       <Row>
                         <Col md="4">
-                          <FormGroup>
+                          { currentUser?.type == 0 ? (
+                            <FormGroup>
                             <Label for="firstName">
                               First Name
                               <span style={{ color: "red" }}>*</span>
@@ -1092,9 +1095,11 @@ const AddAccountInformation = ({ userDetail }) => {
                               <FormFeedback>{firstNameErr}</FormFeedback>
                             )}
                           </FormGroup>
+                          ) : null }
                         </Col>
                         <Col md="4">
-                          <FormGroup>
+                          { currentUser?.type == 0 ? (
+                            <FormGroup>
                             <Label for="middleInitial">Middle Initial</Label>
                             <Input
                               invalid={middleInitialErr !== "" ? true : false}
@@ -1114,9 +1119,39 @@ const AddAccountInformation = ({ userDetail }) => {
                               <FormFeedback>{middleInitialErr}</FormFeedback>
                             )}
                           </FormGroup>
+                          ) : (
+                            <FormGroup>
+                            <Label for="legalBusinessName">
+                              Legal Business Name
+                              <span style={{ color: "red" }}>*</span>
+                            </Label>
+                            <Input
+                              invalid={
+                                legalBusinessNameErr !== "" ? true : false
+                              }
+                              type="text"
+                              name="legalBusinessName"
+                              id="legalBusinessName"
+                              placeholder="Legal Business here..."
+                              value={
+                                currentUser.legalBusinessName
+                                  ? currentUser.legalBusinessName
+                                  : ""
+                              }
+                              onChange={handleInputChange}
+                              onKeyUp={handleValidation}
+                            />
+                            {legalBusinessNameErr !== "" && (
+                              <FormFeedback>
+                                {legalBusinessNameErr}
+                              </FormFeedback>
+                            )}
+                          </FormGroup>
+                          )}
                         </Col>
                         <Col md="4">
-                          <FormGroup>
+                          { currentUser?.type == 0 ? (
+                            <FormGroup>
                             <Label for="lastName">
                               Last Name
                               <span style={{ color: "red" }}>*</span>
@@ -1137,8 +1172,34 @@ const AddAccountInformation = ({ userDetail }) => {
                               <FormFeedback>{lastNameErr}</FormFeedback>
                             )}
                           </FormGroup>
+                          ) : null }
                         </Col>
                       </Row>
+                      { currentUser?.type == 1 ? (
+                        <Row> 
+                        <Col md="4">
+                          
+                        </Col>
+                        <Col md="4">
+                        <FormGroup>
+                            <Label for="dbaName">DBA Name</Label>
+                            <Input
+                              type="text"
+                              name="dbaName"
+                              id="dbaName"
+                              placeholder="DBA Name here..."
+                              value={
+                                currentUser.dbaName ? currentUser.dbaName : ""
+                              }
+                              onChange={handleInputChange}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md="4">
+                          
+                        </Col>
+                      </Row>
+                      ) : null}
                       <Row>
                         <Col md="4">
                           <FormGroup>
